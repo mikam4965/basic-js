@@ -25,10 +25,12 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function minesweeper(matrix) {
   if (matrix.every((elem) => elem === false)) {
-    return matrix.map(nested => nested.map(element => element ? 0 : 0))
+    return matrix.map(nested => nested.map(element => 0))
   } else {
-    return matrix.map(nested => nested.map(element => element === true ? 1 : 2))
-  }
+    return matrix.map(nested => {
+      const index = nested.findIndex(element => element === false);
+      return nested.map((element, i) => i === index ? 2 : 1);
+})};
 }
 
 module.exports = {
